@@ -22,7 +22,6 @@ public class TestManager {
         // Create a new instance of the Chrome driver
         // Notice that the remainder of the code relies on the interface,
         // not the implementation.
-
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         // Use this to visit Beru.ru
@@ -31,14 +30,15 @@ public class TestManager {
 
     @Test
     public void runTest() {
-        driverSetup();
-        Authorization.RunTest(driver);
+        System.out.println("----------------------------------");
+        Authorization.runTest(driver);
+        System.out.println("----------------------------------");
     }
 
     //Close the browser
     @AfterTest
     public void closeDriver() {
-        driver.quit();
+        //driver.quit();
     }
 
 }
