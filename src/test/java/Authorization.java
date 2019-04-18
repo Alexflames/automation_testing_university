@@ -1,22 +1,32 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import javax.swing.*;
 import java.util.regex.Pattern;
 
-public class Authorization {
+public class Authorization extends AutoTest {
 
     public static void authorize (WebDriver driver) {
         // Find the ad close element by its class name (If there is any)
-        WebElement closeAd = driver.findElement(By.className("_1ZYDKa22GJ"));
-        if (closeAd != null) {
-            closeAd.click();
+        try {
+            WebElement closeAd = driver.findElement(By.className("_1ZYDKa22GJ"));
+            if (closeAd != null) {
+                closeAd.click();
+            }
         }
+        catch (Exception expt) { }
+
 
         // Find user login button
         (new WebDriverWait(driver, 10)).until(
@@ -43,7 +53,8 @@ public class Authorization {
                 ExpectedConditions.presenceOfElementLocated(By.className("header2-nav-item__text")));
     }
 
-    public static void runTest (WebDriver driver) {
+    @Test
+    public void runTest () {
         authorize(driver);
         // Check authorization
         WebElement myProfile = driver.findElement(By.className("header2-nav-item__text"));

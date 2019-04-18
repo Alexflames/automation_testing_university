@@ -4,21 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-public class TestManager {
-    WebDriver driver;
+public class AutoTest {
+    public WebDriver driver;
 
-    @BeforeClass
-    public void driverSetup() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeTest
+    @BeforeMethod
     public void driverInit() {
+        WebDriverManager.chromedriver().setup();
         // Create a new instance of the Chrome driver
         // Notice that the remainder of the code relies on the interface,
         // not the implementation.
@@ -26,19 +19,12 @@ public class TestManager {
         driver.manage().window().maximize();
         // Use this to visit Beru.ru
         driver.get("http://beru.ru");
-    }
-
-    @Test
-    public void runTest() {
-        System.out.println("----------------------------------");
-        Authorization.runTest(driver);
         System.out.println("----------------------------------");
     }
 
     //Close the browser
-    @AfterTest
+    @AfterMethod
     public void closeDriver() {
-        //driver.quit();
+        driver.quit();
     }
-
 }
