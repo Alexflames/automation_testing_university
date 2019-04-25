@@ -29,18 +29,21 @@ public class AutoTest {
     //Close the browser
     @AfterMethod
     public void closeDriver() {
-        WebElement myProfile = driver.findElement(By.className("header2-nav-item__text"));
-        (new WebDriverWait(driver, 10)).until(
-                ExpectedConditions.textMatches(By.className("header2-nav-item__text"), Pattern.compile("Мой профиль")));
+        try {
+            WebElement myProfile = driver.findElement(By.className("header2-nav-item__text"));
+            (new WebDriverWait(driver, 10)).until(
+                    ExpectedConditions.textMatches(By.className("header2-nav-item__text"), Pattern.compile("Мой профиль")));
 
-        // Hover mouse over 'My profile' to logout from user
-        Actions mouseHover = new Actions(driver);
-        mouseHover.moveToElement(myProfile).perform();
+            // Hover mouse over 'My profile' to logout from user
+            Actions mouseHover = new Actions(driver);
+            mouseHover.moveToElement(myProfile).perform();
 
-        (new WebDriverWait(driver, 10)).until(
-        ExpectedConditions.presenceOfElementLocated(By.className("header2-user-menu__logout")));
-        WebElement logout = driver.findElement(By.className("header2-user-menu__logout"));
-        logout.click();
-        driver.quit();
+            (new WebDriverWait(driver, 10)).until(
+                    ExpectedConditions.presenceOfElementLocated(By.className("header2-user-menu__logout")));
+            WebElement logout = driver.findElement(By.className("header2-user-menu__logout"));
+            logout.click();
+        } finally {
+            driver.quit();
+        }
     }
 }
