@@ -51,19 +51,5 @@ public class Authorization extends AutoTest {
     @Test
     public void runTest () {
         authorize(driver);
-        // Check authorization
-        WebElement myProfile = driver.findElement(By.className("header2-nav-item__text"));
-        boolean result = (new WebDriverWait(driver, 10)).until(
-                ExpectedConditions.textMatches(By.className("header2-nav-item__text"), Pattern.compile("Мой профиль")));
-
-        // Hover mouse over 'My profile' to logout from user
-        Actions mouseHover = new Actions(driver);
-        mouseHover.moveToElement(myProfile).perform();
-
-        // Return to initial pre-test state
-        (new WebDriverWait(driver, 10)).until(
-                ExpectedConditions.presenceOfElementLocated(By.className("header2-user-menu__logout")));
-        WebElement logout = driver.findElement(By.className("header2-user-menu__logout"));
-        logout.click();
     }
 }
