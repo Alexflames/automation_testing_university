@@ -22,7 +22,6 @@ public class Authorization extends AutoTest {
         }
         catch (Exception expt) { System.out.println("Отсутствует pop-up"); }
 
-
         // Find user login button
         HeaderPageObject headerPageObject = new HeaderPageObject(driver);
         headerPageObject.clickLogin();
