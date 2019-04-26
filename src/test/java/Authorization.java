@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.regex.Pattern;
@@ -38,7 +39,6 @@ public class Authorization extends AutoTest {
         authorize(driver);
         HeaderPageObject headerPageObject = new HeaderPageObject(driver);
 
-        (new WebDriverWait(driver, 10)).until(
-                ExpectedConditions.textToBePresentInElement(headerPageObject.getMyProfile(), "Мой профиль"));
+        Assert.assertEquals(headerPageObject.getMyProfile().getText(), "Мой профиль");
     }
 }
