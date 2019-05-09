@@ -28,15 +28,14 @@ public class Authorization extends AutoTest {
         headerPageObject.clickLogin();
 
         LoginPageObject loginPageObject = new LoginPageObject(driver);
-        loginPageObject.InputLogin("an9rybot");
+        loginPageObject.sendInputLogin("an9rybot");
 
         // Do the same for password field
-        loginPageObject.InputPassword("veryangrybot");
+        loginPageObject.sendInputPassword("veryangrybot");
     }
 
     @Test
     public void runTest () {
-        authorize(driver);
         HeaderPageObject headerPageObject = new HeaderPageObject(driver);
 
         Assert.assertEquals(headerPageObject.getMyProfile().getText(), "Мой профиль");

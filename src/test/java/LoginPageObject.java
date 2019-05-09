@@ -6,12 +6,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPageObject {
     private WebElement inputLogin;
+    private WebDriverWait driverWait;
     WebDriver driver;
 
     LoginPageObject(WebDriver driver) {
         this.driver = driver;
-        (new WebDriverWait(driver, 10)).until(
-                ExpectedConditions.presenceOfElementLocated(By.id("passp-field-login")));
+        driverWait = new WebDriverWait(driver, 10);
+        driverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("passp-field-login")));
         inputLogin = driver.findElement(By.id("passp-field-login"));
     }
 
@@ -21,12 +22,11 @@ public class LoginPageObject {
 
     public WebElement getInputPassword() {
         // Due to dynamic page load this cannot be done in constructor
-        (new WebDriverWait(driver, 10)).until(
-                ExpectedConditions.presenceOfElementLocated(By.id("passp-field-passwd")));
+        driverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("passp-field-passwd")));
         return driver.findElement(By.id("passp-field-passwd"));
     }
 
-    public void InputLogin(String login) {
+    public void sendInputLogin(String login) {
         // Get login input field
         WebElement inputLogin = getInputLogin();
         inputLogin.sendKeys(login);
@@ -34,7 +34,7 @@ public class LoginPageObject {
         inputLogin.submit();
     }
 
-    public void InputPassword(String password) {
+    public void sendInputPassword(String password) {
         WebElement passwordInput = getInputPassword();
         passwordInput.sendKeys(password);
         passwordInput.submit();

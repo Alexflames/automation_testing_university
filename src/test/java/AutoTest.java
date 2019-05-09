@@ -24,6 +24,7 @@ public class AutoTest {
         driver.manage().window().maximize();
         // Use this to visit Beru.ru
         driver.get("http://beru.ru");
+        Authorization.authorize(driver);
     }
 
     //Close the browser

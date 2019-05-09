@@ -5,6 +5,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,8 +16,12 @@ public class FreeDelivery extends AutoTest {
 
     @Test
     public void runFreeDeliveryTest() {
-        Authorization.authorize(driver);
+        HeaderPageObject headerPageObject = new HeaderPageObject(driver);
+        headerPageObject.getButtonCatalog().click();
+    }
 
+    @AfterMethod
+    public void closeDriver() {
 
     }
 }

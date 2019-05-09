@@ -1,15 +1,21 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite1" verbose="1" >
-    <test name="Authorization" >
+<suite name="Suite1" verbose="1">
+    <test name="Authorization">
         <classes>
-            <class name="Authorization" />
+            <class name="Authorization"/>
         </classes>
     </test>
 
     <test name="ChangeCity">
         <classes>
             <class name="ChangeCity"/>
+        </classes>
+    </test>
+
+    <test name="FreeDelivery">
+        <classes>
+            <class name="FreeDelivery"/>
         </classes>
     </test>
 </suite>
