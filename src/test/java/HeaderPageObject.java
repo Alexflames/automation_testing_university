@@ -57,7 +57,7 @@ public class HeaderPageObject {
     }
 
     public WebElement getMySettings() {
-        (new WebDriverWait(driver, 10)).until(
+        driverWait.until(
                 ExpectedConditions.presenceOfElementLocated(By.className("header2-user-menu__item_type_settings")));
         return driver.findElement(By.className("header2-user-menu__item_type_settings"));
     }
@@ -68,5 +68,9 @@ public class HeaderPageObject {
 
     public WebElement getMainButton() {
         return driver.findElement(By.className("header2__logo"));
+    }
+
+    public void moveToCart() {
+        driver.findElement(By.className("header2-nav-item_type_cart")).click();
     }
 }
