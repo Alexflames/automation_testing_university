@@ -1,4 +1,3 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -37,8 +36,12 @@ public class FreeDelivery extends AutoTest {
 
         catalog.buyPrevLastItem();
 
-        catalog.checkPriceInCart(headerPageObject);
-        catalog.checkFreeDelivery(catalog.addItemsUntilFree());
+        // test that price is calculated properly
+        Assert.assertEquals(catalog.checkPriceInCart(headerPageObject), 0);
+        int freePrice = Integer.parseInt(catalog.addItemsUntilFree());
+        String totalPriceText = catalog.checkFreeDelivery();
+        // check that price is the same as of items that are bought
+        Assert.assertEquals(Integer.parseInt(totalPriceText), freePrice);
         catalog.clearBrushesIfAny();
     }
 }

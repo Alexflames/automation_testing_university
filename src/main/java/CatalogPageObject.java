@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ public class CatalogPageObject {
     public WebElement getCategoryByName(String categoryTitle) {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(categoryTitle)));
         WebElement el = driver.findElement(By.className("popup2__content")).findElement(By.linkText(categoryTitle));
-        System.out.println(el.getText());
         return el;
     }
 
@@ -73,17 +71,19 @@ public class CatalogPageObject {
         }
     }
 
-    public void checkPriceInCart(HeaderPageObject header) {
+    public int checkPriceInCart(HeaderPageObject header) {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_39B7yXQbvm")));
         header.moveToCart();
-        driverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("voCFmXKfcL")));
+        driverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("_3BLMSktvAP")));
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_1oBlNqVHPq")));
         String toFree =
-                driver.findElement(By.className("voCFmXKfcL")).getText().replaceAll("[\\D]", "");
+                driver.findElement(By.className("_3BLMSktvAP")).getText().replaceAll("[\\D]", "");
         List<WebElement> prices = driver.findElements(By.className("_1Q9ASvPbPN"));
+        System.out.println(prices.get(0).getText());
         String priceFirstItem = prices.get(0).getText().replaceAll("[\\D]", "");
         System.out.println(toFree);
         System.out.println(priceFirstItem);
-        Assert.assertEquals(Integer.parseInt(priceFirstItem), freeDeliveryFrom - Integer.parseInt(toFree) + 10000);
+        return (freeDeliveryFrom - (Integer.parseInt(priceFirstItem) - 10000) - Integer.parseInt(toFree));
     }
 
     public String addItemsUntilFree() {
@@ -96,13 +96,12 @@ public class CatalogPageObject {
         return priceText;
     }
 
-    public void checkFreeDelivery(String brushPrice) {
-        driverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("_1O0RrvwYg5")));
-        WebElement freeDeliveryText = driver.findElement(By.className("_1O0RrvwYg5"));
-        Assert.assertEquals(freeDeliveryText.getText(), "бесплатную доставку");
+    public String checkFreeDelivery() {
+        // check that icon displays free delivery
+        driverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("_2Bly7jUuwC")));
         WebElement totalPrice = driver.findElement(By.className("_1oBlNqVHPq"));
         String totalPriceText = totalPrice.getText().replaceAll("[\\D]", "");
-        Assert.assertEquals(Integer.parseInt(totalPriceText), Integer.parseInt(brushPrice));
+        return totalPriceText;
     }
 
     public void clearBrushesIfAny() {
