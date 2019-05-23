@@ -2,15 +2,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.hamcrest.*;
 
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.regex.Pattern;
+import pagepack.HeaderPageObject;
+import pagepack.RegionSelectPageObject;
+import pagepack.SettingsPageObject;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.matchesPattern;

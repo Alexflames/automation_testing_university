@@ -1,3 +1,5 @@
+package pagepack;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +14,7 @@ public class HeaderPageObject {
     private WebDriver driver;
     private WebDriverWait driverWait;
 
-    HeaderPageObject(WebDriver driver) {
+    public HeaderPageObject(WebDriver driver) {
         this.driver = driver;
         driverWait = new WebDriverWait(driver, 10);
         reloadPageObject();
