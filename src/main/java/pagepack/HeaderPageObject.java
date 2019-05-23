@@ -1,5 +1,6 @@
 package pagepack;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ public class HeaderPageObject {
         reloadPageObject();
     }
 
+    @Step("Access page header")
     public void reloadPageObject() {
         driverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("header2-nav__user")));
         userLoginBtn = driver.findElement(By.className("header2-nav__user"));
@@ -29,49 +31,60 @@ public class HeaderPageObject {
         buttonCatalog = driver.findElement(By.className("button2_theme_search"));
     }
 
+    @Step("Get login button")
     public WebElement getUserLoginBtn() {
         return userLoginBtn;
     }
 
+    @Step("Get my profile button")
     public WebElement getMyProfile() {
         return myProfile;
     }
 
+    @Step("Get catalog button")
     public WebElement getButtonCatalog() { return buttonCatalog; }
 
+    @Step("Click login button")
     public void clickLogin() {
         userLoginBtn.click();
     }
 
+    @Step("Get user region in header")
     public WebElement getRegion() {
         driverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("region-form-opener")));
         return driver.findElement(By.className("region-form-opener"));
     }
 
+    @Step("Click region button to switch region")
     public void clickChangeCity() {
         getRegion().click();
     }
 
+    @Step("Hover mouse over my profile")
     public void hoverOverMyProfile() {
         Actions mouseHover = new Actions(driver);
         reloadPageObject();
         mouseHover.moveToElement(getMyProfile()).perform();
     }
 
+    @Step("Get my settings button")
     public WebElement getMySettings() {
         driverWait.until(
                 ExpectedConditions.presenceOfElementLocated(By.className("header2-user-menu__item_type_settings")));
         return driver.findElement(By.className("header2-user-menu__item_type_settings"));
     }
 
+    @Step("Click my settings button")
     public void clickMySettings() {
         getMySettings().click();
     }
 
+    @Step("Click main page button")
     public WebElement getMainButton() {
         return driver.findElement(By.className("header2__logo"));
     }
 
+    @Step("Move to cart")
     public void moveToCart() {
         driver.findElement(By.className("header2-nav-item_type_cart")).click();
     }

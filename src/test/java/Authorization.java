@@ -4,12 +4,13 @@ import org.openqa.selenium.WebElement;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pagepack.AutoTest;
 import pagepack.HeaderPageObject;
 import pagepack.LoginPageObject;
 
 public class Authorization extends AutoTest {
 
-    static void authorize (WebDriver driver) {
+    public static void authorize (WebDriver driver) {
         // Find the ad close element by its class name (If there is any)
         try {
             WebElement closeAd = driver.findElement(By.className("_1ZYDKa22GJ"));
@@ -32,7 +33,8 @@ public class Authorization extends AutoTest {
 
     @Test
     public void runTest () {
-        HeaderPageObject headerPageObject = new HeaderPageObject(driver);
+        Authorization.authorize(AutoTest.getDriver());
+        HeaderPageObject headerPageObject = new HeaderPageObject(AutoTest.getDriver());
 
         Assert.assertEquals(headerPageObject.getMyProfile().getText(), "Мой профиль");
     }

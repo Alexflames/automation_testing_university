@@ -1,15 +1,22 @@
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import pagepack.AutoTest;
 import pagepack.CatalogPageObject;
 import pagepack.HeaderPageObject;
+import pagepack.TestScreenshotter;
 
+@Listeners({TestScreenshotter.class})
 public class FreeDelivery extends AutoTest {
     private String priceFrom = "999";
     private String priceTo = "1999";
 
     @Test
     public void runFreeDeliveryTest() {
+        WebDriver driver = AutoTest.getDriver();
+        Authorization.authorize(driver);
         HeaderPageObject headerPageObject = new HeaderPageObject(driver);
         headerPageObject.getButtonCatalog().click();
 

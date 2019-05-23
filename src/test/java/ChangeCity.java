@@ -4,12 +4,10 @@ import org.hamcrest.*;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pagepack.AutoTest;
 import pagepack.HeaderPageObject;
 import pagepack.RegionSelectPageObject;
 import pagepack.SettingsPageObject;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.matchesPattern;
 
 public class ChangeCity extends AutoTest {
 
@@ -23,10 +21,11 @@ public class ChangeCity extends AutoTest {
 
     @Test(dataProvider = "cityOptions")
     public void runCityTest(String dataCityName) {
-        HeaderPageObject header = new HeaderPageObject(driver);
+        Authorization.authorize(AutoTest.getDriver());
+        HeaderPageObject header = new HeaderPageObject(AutoTest.getDriver());
         header.clickChangeCity();
 
-        RegionSelectPageObject regionSelect = new RegionSelectPageObject(driver);
+        RegionSelectPageObject regionSelect = new RegionSelectPageObject(AutoTest.getDriver());
         regionSelect.setCity(dataCityName);
 
         // Hover mouse over 'My profile'
@@ -34,12 +33,12 @@ public class ChangeCity extends AutoTest {
         header.clickMySettings();
 
         // Check of top-left city button & settings city name
-        SettingsPageObject settings = new SettingsPageObject(driver);
+        SettingsPageObject settings = new SettingsPageObject(AutoTest.getDriver());
 
         MatcherAssert.assertThat(header.getRegion().getText(), Matchers.containsString(dataCityName));
         MatcherAssert.assertThat(settings.getMyCity().getText(), Matchers.containsString(dataCityName));
 
-        WebElement returnToMain = driver.findElement(By.className("header2__logo"));
+        WebElement returnToMain = AutoTest.getDriver().findElement(By.className("header2__logo"));
         returnToMain.click();
     }
 }

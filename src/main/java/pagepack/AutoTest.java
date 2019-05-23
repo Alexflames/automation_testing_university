@@ -1,18 +1,26 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
+package pagepack;
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.regex.Pattern;
 
 public class AutoTest {
-    WebDriver driver;
+    static EventFiringWebDriver driver;
+
+    public static WebDriver getDriver() {
+        return driver;
+    }
 
     @BeforeMethod
     public void driverInit() {
@@ -20,11 +28,12 @@ public class AutoTest {
         // Create a new instance of the Chrome driver
         // Notice that the remainder of the code relies on the interface,
         // not the implementation.
-        driver = new ChromeDriver();
+        driver = new EventFiringWebDriver(new ChromeDriver());
+        driver.register(new DriverScreenshotter());
+
         driver.manage().window().maximize();
         // Use this to visit Beru.ru
         driver.get("http://beru.ru");
-        Authorization.authorize(driver);
     }
 
     //Close the browser

@@ -27,6 +27,7 @@ public class CatalogPageObject {
         return el;
     }
 
+    @Step("Hover over category")
     public void hoverOverCategory(WebElement category) {
         Actions mouse = new Actions(driver);
         mouse.moveToElement(category).perform();
