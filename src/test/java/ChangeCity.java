@@ -21,8 +21,8 @@ public class ChangeCity extends AutoTest {
 
     @Test(dataProvider = "cityOptions")
     public void runCityTest(String dataCityName) {
-        Authorization.authorize(AutoTest.getDriver());
         HeaderPageObject header = new HeaderPageObject(AutoTest.getDriver());
+        header.authorize(getDriver());
         header.clickChangeCity();
 
         RegionSelectPageObject regionSelect = new RegionSelectPageObject(AutoTest.getDriver());

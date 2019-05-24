@@ -88,4 +88,26 @@ public class HeaderPageObject {
     public void moveToCart() {
         driver.findElement(By.className("header2-nav-item_type_cart")).click();
     }
+
+    @Step("User authorization")
+    public void authorize (WebDriver driver) {
+        // Find the ad close element by its class name (If there is any)
+        try {
+            WebElement closeAd = driver.findElement(By.className("_1ZYDKa22GJ"));
+            if (closeAd != null) {
+                closeAd.click();
+            }
+        }
+        catch (Exception expt) { System.out.println("Отсутствует pop-up"); }
+
+        // Find user login button
+        clickLogin();
+
+        LoginPageObject loginPageObject = new LoginPageObject(driver);
+        loginPageObject.sendInputLogin("an9rybot");
+
+        // Do the same for password field
+        loginPageObject.sendInputPassword("veryangrybot");
+        reloadPageObject();
+    }
 }

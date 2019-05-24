@@ -16,8 +16,8 @@ public class FreeDelivery extends AutoTest {
     @Test
     public void runFreeDeliveryTest() {
         WebDriver driver = AutoTest.getDriver();
-        Authorization.authorize(driver);
         HeaderPageObject headerPageObject = new HeaderPageObject(driver);
+        headerPageObject.authorize(driver);
         headerPageObject.getButtonCatalog().click();
 
         CatalogPageObject catalog = new CatalogPageObject(driver);
