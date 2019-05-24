@@ -38,7 +38,7 @@ public class ChangeCity extends AutoTest {
         MatcherAssert.assertThat(header.getRegion().getText(), Matchers.containsString(dataCityName));
         MatcherAssert.assertThat(settings.getMyCity().getText(), Matchers.containsString(dataCityName));
 
-        WebElement returnToMain = AutoTest.getDriver().findElement(By.className("header2__logo"));
-        returnToMain.click();
+        // Return to main page
+        header.getMainButton().click();
     }
 }
